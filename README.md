@@ -9,7 +9,7 @@ run the following commands
     python -m venv .venv/
 ```
 
-Once this is done please launch the virtual environment. You can refer to [https://docs.python.org/3/library/venv.html](this link) to learn how 
+Once this is done please launch the virtual environment. You can refer to [this link](https://docs.python.org/3/library/venv.html) to learn how 
 to launch one. You will then need to install the following libraries within the environment.
 
 ```bash
