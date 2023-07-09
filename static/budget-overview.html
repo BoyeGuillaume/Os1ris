@@ -1,0 +1,60 @@
+<div>
+    <h1>Overview &#x2014; %%data.name%% <span class="interval" style="color: #888;">(@@_.escape(data.interval)@@)</span></h1>
+    <br>
+
+    <h2>
+        Incomes
+    </h2>
+
+    <div style="width: 80%;" class="center"><canvas id="mainGraph"></canvas></div>
+
+    <h2>
+        Raw
+    </h2>
+    @@
+        JSON.stringify(data)
+    @@
+
+    <script>
+        $('#mainGraph').Chart({
+            type: 'bar',
+            options: {
+                grouped: true,
+                plugins: {
+                    title: { display: true, text: ' Loading... ' },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => {
+                                return formatCurrency("${_.escape(data.currency)}", context.parsed.y);
+                            },
+                        }
+                    }
+                },
+                animation: {
+                    onComplete: () => {
+                        delayed = true;
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+                        if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                            delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                        }
+                        return delay;
+                    },
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Date' },
+                        type: 'time',
+                    },
+                    y: {
+                        title: { display: true, text: 'Net growth' },
+                        ticks: {
+                            callback: (value, index, ticks) => formatCurrency("${_.escape(data.currency)}", value)
+                        }
+                    },
+                }
+            }
+        })
+    </script>
+</div>

@@ -1,0 +1,1118 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    FROM
+    GROUP
+    SELECT
+    WHERE
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> term
+Rule 2     bin_expr_term -> ( bin_expr )
+Rule 3     bin_expr_term -> expression BINCOMP expression
+Rule 4     bin_expr_term -> expression LIKE expression
+Rule 5     bin_expr -> bin_expr AND bin_expr
+Rule 6     bin_expr -> bin_expr OR bin_expr
+Rule 7     bin_expr -> bin_expr XOR bin_expr
+Rule 8     expression -> expression + term
+Rule 9     expression -> expression - term
+Rule 10    expression -> expression CONCAT term
+Rule 11    term -> term * factor
+Rule 12    term -> term / factor
+Rule 13    bin_expr -> NOT bin_expr_term
+Rule 14    term -> factor
+Rule 15    factor -> ID
+Rule 16    bin_expr -> bin_expr_term
+Rule 17    bin_expr -> BOOLEAN
+Rule 18    term -> STRING
+Rule 19    factor -> NUMBER
+Rule 20    factor -> function
+Rule 21    factor -> ( expression )
+Rule 22    function -> ID ( arglist )
+Rule 23    arglist -> <empty>
+Rule 24    arglist -> expression
+Rule 25    arglist -> bin_expr
+Rule 26    arglist -> arglist , expression
+Rule 27    arglist -> arglist , bin_expr
+
+Terminals, with rules where they appear
+
+(                    : 2 21 22
+)                    : 2 21 22
+*                    : 11
++                    : 8
+,                    : 26 27
+-                    : 9
+/                    : 12
+AND                  : 5
+BINCOMP              : 3
+BOOLEAN              : 17
+CONCAT               : 10
+FROM                 : 
+GROUP                : 
+ID                   : 15 22
+LIKE                 : 4
+NOT                  : 13
+NUMBER               : 19
+OR                   : 6
+SELECT               : 
+STRING               : 18
+WHERE                : 
+XOR                  : 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+arglist              : 22 26 27
+bin_expr             : 2 5 5 6 6 7 7 25 27
+bin_expr_term        : 13 16
+expression           : 3 3 4 4 8 9 10 21 24 26 0
+factor               : 11 12 14
+function             : 20
+term                 : 1 8 9 10 11 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+    (               shift and go to state 8
+
+    expression                     shift and go to state 1
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 1
+
+    (0) S' -> expression .
+    (8) expression -> expression . + term
+    (9) expression -> expression . - term
+    (10) expression -> expression . CONCAT term
+
+    +               shift and go to state 9
+    -               shift and go to state 10
+    CONCAT          shift and go to state 11
+
+
+state 2
+
+    (1) expression -> term .
+    (11) term -> term . * factor
+    (12) term -> term . / factor
+
+    +               reduce using rule 1 (expression -> term .)
+    -               reduce using rule 1 (expression -> term .)
+    CONCAT          reduce using rule 1 (expression -> term .)
+    $end            reduce using rule 1 (expression -> term .)
+    )               reduce using rule 1 (expression -> term .)
+    BINCOMP         reduce using rule 1 (expression -> term .)
+    LIKE            reduce using rule 1 (expression -> term .)
+    ,               reduce using rule 1 (expression -> term .)
+    AND             reduce using rule 1 (expression -> term .)
+    OR              reduce using rule 1 (expression -> term .)
+    XOR             reduce using rule 1 (expression -> term .)
+    *               shift and go to state 12
+    /               shift and go to state 13
+
+
+state 3
+
+    (14) term -> factor .
+
+    *               reduce using rule 14 (term -> factor .)
+    /               reduce using rule 14 (term -> factor .)
+    +               reduce using rule 14 (term -> factor .)
+    -               reduce using rule 14 (term -> factor .)
+    CONCAT          reduce using rule 14 (term -> factor .)
+    $end            reduce using rule 14 (term -> factor .)
+    )               reduce using rule 14 (term -> factor .)
+    BINCOMP         reduce using rule 14 (term -> factor .)
+    LIKE            reduce using rule 14 (term -> factor .)
+    ,               reduce using rule 14 (term -> factor .)
+    AND             reduce using rule 14 (term -> factor .)
+    OR              reduce using rule 14 (term -> factor .)
+    XOR             reduce using rule 14 (term -> factor .)
+
+
+state 4
+
+    (18) term -> STRING .
+
+    *               reduce using rule 18 (term -> STRING .)
+    /               reduce using rule 18 (term -> STRING .)
+    +               reduce using rule 18 (term -> STRING .)
+    -               reduce using rule 18 (term -> STRING .)
+    CONCAT          reduce using rule 18 (term -> STRING .)
+    $end            reduce using rule 18 (term -> STRING .)
+    )               reduce using rule 18 (term -> STRING .)
+    BINCOMP         reduce using rule 18 (term -> STRING .)
+    LIKE            reduce using rule 18 (term -> STRING .)
+    ,               reduce using rule 18 (term -> STRING .)
+    AND             reduce using rule 18 (term -> STRING .)
+    OR              reduce using rule 18 (term -> STRING .)
+    XOR             reduce using rule 18 (term -> STRING .)
+
+
+state 5
+
+    (15) factor -> ID .
+    (22) function -> ID . ( arglist )
+
+    *               reduce using rule 15 (factor -> ID .)
+    /               reduce using rule 15 (factor -> ID .)
+    +               reduce using rule 15 (factor -> ID .)
+    -               reduce using rule 15 (factor -> ID .)
+    CONCAT          reduce using rule 15 (factor -> ID .)
+    $end            reduce using rule 15 (factor -> ID .)
+    )               reduce using rule 15 (factor -> ID .)
+    BINCOMP         reduce using rule 15 (factor -> ID .)
+    LIKE            reduce using rule 15 (factor -> ID .)
+    ,               reduce using rule 15 (factor -> ID .)
+    AND             reduce using rule 15 (factor -> ID .)
+    OR              reduce using rule 15 (factor -> ID .)
+    XOR             reduce using rule 15 (factor -> ID .)
+    (               shift and go to state 14
+
+
+state 6
+
+    (19) factor -> NUMBER .
+
+    *               reduce using rule 19 (factor -> NUMBER .)
+    /               reduce using rule 19 (factor -> NUMBER .)
+    +               reduce using rule 19 (factor -> NUMBER .)
+    -               reduce using rule 19 (factor -> NUMBER .)
+    CONCAT          reduce using rule 19 (factor -> NUMBER .)
+    $end            reduce using rule 19 (factor -> NUMBER .)
+    )               reduce using rule 19 (factor -> NUMBER .)
+    BINCOMP         reduce using rule 19 (factor -> NUMBER .)
+    LIKE            reduce using rule 19 (factor -> NUMBER .)
+    ,               reduce using rule 19 (factor -> NUMBER .)
+    AND             reduce using rule 19 (factor -> NUMBER .)
+    OR              reduce using rule 19 (factor -> NUMBER .)
+    XOR             reduce using rule 19 (factor -> NUMBER .)
+
+
+state 7
+
+    (20) factor -> function .
+
+    *               reduce using rule 20 (factor -> function .)
+    /               reduce using rule 20 (factor -> function .)
+    +               reduce using rule 20 (factor -> function .)
+    -               reduce using rule 20 (factor -> function .)
+    CONCAT          reduce using rule 20 (factor -> function .)
+    $end            reduce using rule 20 (factor -> function .)
+    )               reduce using rule 20 (factor -> function .)
+    BINCOMP         reduce using rule 20 (factor -> function .)
+    LIKE            reduce using rule 20 (factor -> function .)
+    ,               reduce using rule 20 (factor -> function .)
+    AND             reduce using rule 20 (factor -> function .)
+    OR              reduce using rule 20 (factor -> function .)
+    XOR             reduce using rule 20 (factor -> function .)
+
+
+state 8
+
+    (21) factor -> ( . expression )
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+    (               shift and go to state 8
+
+    expression                     shift and go to state 15
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 9
+
+    (8) expression -> expression + . term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+    (               shift and go to state 8
+
+    term                           shift and go to state 16
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 10
+
+    (9) expression -> expression - . term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+    (               shift and go to state 8
+
+    term                           shift and go to state 17
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 11
+
+    (10) expression -> expression CONCAT . term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+    (               shift and go to state 8
+
+    term                           shift and go to state 18
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 12
+
+    (11) term -> term * . factor
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+    (               shift and go to state 8
+
+    factor                         shift and go to state 19
+    function                       shift and go to state 7
+
+state 13
+
+    (12) term -> term / . factor
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+    (               shift and go to state 8
+
+    factor                         shift and go to state 20
+    function                       shift and go to state 7
+
+state 14
+
+    (22) function -> ID ( . arglist )
+    (23) arglist -> .
+    (24) arglist -> . expression
+    (25) arglist -> . bin_expr
+    (26) arglist -> . arglist , expression
+    (27) arglist -> . arglist , bin_expr
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (5) bin_expr -> . bin_expr AND bin_expr
+    (6) bin_expr -> . bin_expr OR bin_expr
+    (7) bin_expr -> . bin_expr XOR bin_expr
+    (13) bin_expr -> . NOT bin_expr_term
+    (16) bin_expr -> . bin_expr_term
+    (17) bin_expr -> . BOOLEAN
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (2) bin_expr_term -> . ( bin_expr )
+    (3) bin_expr_term -> . expression BINCOMP expression
+    (4) bin_expr_term -> . expression LIKE expression
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    )               reduce using rule 23 (arglist -> .)
+    ,               reduce using rule 23 (arglist -> .)
+    NOT             shift and go to state 25
+    BOOLEAN         shift and go to state 27
+    STRING          shift and go to state 4
+    (               shift and go to state 21
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+
+    arglist                        shift and go to state 22
+    expression                     shift and go to state 23
+    bin_expr                       shift and go to state 24
+    term                           shift and go to state 2
+    bin_expr_term                  shift and go to state 26
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 15
+
+    (21) factor -> ( expression . )
+    (8) expression -> expression . + term
+    (9) expression -> expression . - term
+    (10) expression -> expression . CONCAT term
+
+    )               shift and go to state 28
+    +               shift and go to state 9
+    -               shift and go to state 10
+    CONCAT          shift and go to state 11
+
+
+state 16
+
+    (8) expression -> expression + term .
+    (11) term -> term . * factor
+    (12) term -> term . / factor
+
+    +               reduce using rule 8 (expression -> expression + term .)
+    -               reduce using rule 8 (expression -> expression + term .)
+    CONCAT          reduce using rule 8 (expression -> expression + term .)
+    $end            reduce using rule 8 (expression -> expression + term .)
+    )               reduce using rule 8 (expression -> expression + term .)
+    BINCOMP         reduce using rule 8 (expression -> expression + term .)
+    LIKE            reduce using rule 8 (expression -> expression + term .)
+    ,               reduce using rule 8 (expression -> expression + term .)
+    AND             reduce using rule 8 (expression -> expression + term .)
+    OR              reduce using rule 8 (expression -> expression + term .)
+    XOR             reduce using rule 8 (expression -> expression + term .)
+    *               shift and go to state 12
+    /               shift and go to state 13
+
+
+state 17
+
+    (9) expression -> expression - term .
+    (11) term -> term . * factor
+    (12) term -> term . / factor
+
+    +               reduce using rule 9 (expression -> expression - term .)
+    -               reduce using rule 9 (expression -> expression - term .)
+    CONCAT          reduce using rule 9 (expression -> expression - term .)
+    $end            reduce using rule 9 (expression -> expression - term .)
+    )               reduce using rule 9 (expression -> expression - term .)
+    BINCOMP         reduce using rule 9 (expression -> expression - term .)
+    LIKE            reduce using rule 9 (expression -> expression - term .)
+    ,               reduce using rule 9 (expression -> expression - term .)
+    AND             reduce using rule 9 (expression -> expression - term .)
+    OR              reduce using rule 9 (expression -> expression - term .)
+    XOR             reduce using rule 9 (expression -> expression - term .)
+    *               shift and go to state 12
+    /               shift and go to state 13
+
+
+state 18
+
+    (10) expression -> expression CONCAT term .
+    (11) term -> term . * factor
+    (12) term -> term . / factor
+
+    +               reduce using rule 10 (expression -> expression CONCAT term .)
+    -               reduce using rule 10 (expression -> expression CONCAT term .)
+    CONCAT          reduce using rule 10 (expression -> expression CONCAT term .)
+    $end            reduce using rule 10 (expression -> expression CONCAT term .)
+    )               reduce using rule 10 (expression -> expression CONCAT term .)
+    BINCOMP         reduce using rule 10 (expression -> expression CONCAT term .)
+    LIKE            reduce using rule 10 (expression -> expression CONCAT term .)
+    ,               reduce using rule 10 (expression -> expression CONCAT term .)
+    AND             reduce using rule 10 (expression -> expression CONCAT term .)
+    OR              reduce using rule 10 (expression -> expression CONCAT term .)
+    XOR             reduce using rule 10 (expression -> expression CONCAT term .)
+    *               shift and go to state 12
+    /               shift and go to state 13
+
+
+state 19
+
+    (11) term -> term * factor .
+
+    *               reduce using rule 11 (term -> term * factor .)
+    /               reduce using rule 11 (term -> term * factor .)
+    +               reduce using rule 11 (term -> term * factor .)
+    -               reduce using rule 11 (term -> term * factor .)
+    CONCAT          reduce using rule 11 (term -> term * factor .)
+    $end            reduce using rule 11 (term -> term * factor .)
+    )               reduce using rule 11 (term -> term * factor .)
+    BINCOMP         reduce using rule 11 (term -> term * factor .)
+    LIKE            reduce using rule 11 (term -> term * factor .)
+    ,               reduce using rule 11 (term -> term * factor .)
+    AND             reduce using rule 11 (term -> term * factor .)
+    OR              reduce using rule 11 (term -> term * factor .)
+    XOR             reduce using rule 11 (term -> term * factor .)
+
+
+state 20
+
+    (12) term -> term / factor .
+
+    *               reduce using rule 12 (term -> term / factor .)
+    /               reduce using rule 12 (term -> term / factor .)
+    +               reduce using rule 12 (term -> term / factor .)
+    -               reduce using rule 12 (term -> term / factor .)
+    CONCAT          reduce using rule 12 (term -> term / factor .)
+    $end            reduce using rule 12 (term -> term / factor .)
+    )               reduce using rule 12 (term -> term / factor .)
+    BINCOMP         reduce using rule 12 (term -> term / factor .)
+    LIKE            reduce using rule 12 (term -> term / factor .)
+    ,               reduce using rule 12 (term -> term / factor .)
+    AND             reduce using rule 12 (term -> term / factor .)
+    OR              reduce using rule 12 (term -> term / factor .)
+    XOR             reduce using rule 12 (term -> term / factor .)
+
+
+state 21
+
+    (2) bin_expr_term -> ( . bin_expr )
+    (21) factor -> ( . expression )
+    (5) bin_expr -> . bin_expr AND bin_expr
+    (6) bin_expr -> . bin_expr OR bin_expr
+    (7) bin_expr -> . bin_expr XOR bin_expr
+    (13) bin_expr -> . NOT bin_expr_term
+    (16) bin_expr -> . bin_expr_term
+    (17) bin_expr -> . BOOLEAN
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (2) bin_expr_term -> . ( bin_expr )
+    (3) bin_expr_term -> . expression BINCOMP expression
+    (4) bin_expr_term -> . expression LIKE expression
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    NOT             shift and go to state 25
+    BOOLEAN         shift and go to state 27
+    (               shift and go to state 21
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+
+    bin_expr                       shift and go to state 29
+    expression                     shift and go to state 30
+    bin_expr_term                  shift and go to state 26
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 22
+
+    (22) function -> ID ( arglist . )
+    (26) arglist -> arglist . , expression
+    (27) arglist -> arglist . , bin_expr
+
+    )               shift and go to state 31
+    ,               shift and go to state 32
+
+
+state 23
+
+    (24) arglist -> expression .
+    (8) expression -> expression . + term
+    (9) expression -> expression . - term
+    (10) expression -> expression . CONCAT term
+    (3) bin_expr_term -> expression . BINCOMP expression
+    (4) bin_expr_term -> expression . LIKE expression
+
+    )               reduce using rule 24 (arglist -> expression .)
+    ,               reduce using rule 24 (arglist -> expression .)
+    +               shift and go to state 9
+    -               shift and go to state 10
+    CONCAT          shift and go to state 11
+    BINCOMP         shift and go to state 33
+    LIKE            shift and go to state 34
+
+
+state 24
+
+    (25) arglist -> bin_expr .
+    (5) bin_expr -> bin_expr . AND bin_expr
+    (6) bin_expr -> bin_expr . OR bin_expr
+    (7) bin_expr -> bin_expr . XOR bin_expr
+
+    )               reduce using rule 25 (arglist -> bin_expr .)
+    ,               reduce using rule 25 (arglist -> bin_expr .)
+    AND             shift and go to state 35
+    OR              shift and go to state 36
+    XOR             shift and go to state 37
+
+
+state 25
+
+    (13) bin_expr -> NOT . bin_expr_term
+    (2) bin_expr_term -> . ( bin_expr )
+    (3) bin_expr_term -> . expression BINCOMP expression
+    (4) bin_expr_term -> . expression LIKE expression
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    (               shift and go to state 21
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+
+    bin_expr_term                  shift and go to state 38
+    expression                     shift and go to state 39
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 26
+
+    (16) bin_expr -> bin_expr_term .
+
+    AND             reduce using rule 16 (bin_expr -> bin_expr_term .)
+    OR              reduce using rule 16 (bin_expr -> bin_expr_term .)
+    XOR             reduce using rule 16 (bin_expr -> bin_expr_term .)
+    )               reduce using rule 16 (bin_expr -> bin_expr_term .)
+    ,               reduce using rule 16 (bin_expr -> bin_expr_term .)
+
+
+state 27
+
+    (17) bin_expr -> BOOLEAN .
+
+    AND             reduce using rule 17 (bin_expr -> BOOLEAN .)
+    OR              reduce using rule 17 (bin_expr -> BOOLEAN .)
+    XOR             reduce using rule 17 (bin_expr -> BOOLEAN .)
+    )               reduce using rule 17 (bin_expr -> BOOLEAN .)
+    ,               reduce using rule 17 (bin_expr -> BOOLEAN .)
+
+
+state 28
+
+    (21) factor -> ( expression ) .
+
+    *               reduce using rule 21 (factor -> ( expression ) .)
+    /               reduce using rule 21 (factor -> ( expression ) .)
+    +               reduce using rule 21 (factor -> ( expression ) .)
+    -               reduce using rule 21 (factor -> ( expression ) .)
+    CONCAT          reduce using rule 21 (factor -> ( expression ) .)
+    $end            reduce using rule 21 (factor -> ( expression ) .)
+    )               reduce using rule 21 (factor -> ( expression ) .)
+    BINCOMP         reduce using rule 21 (factor -> ( expression ) .)
+    LIKE            reduce using rule 21 (factor -> ( expression ) .)
+    ,               reduce using rule 21 (factor -> ( expression ) .)
+    AND             reduce using rule 21 (factor -> ( expression ) .)
+    OR              reduce using rule 21 (factor -> ( expression ) .)
+    XOR             reduce using rule 21 (factor -> ( expression ) .)
+
+
+state 29
+
+    (2) bin_expr_term -> ( bin_expr . )
+    (5) bin_expr -> bin_expr . AND bin_expr
+    (6) bin_expr -> bin_expr . OR bin_expr
+    (7) bin_expr -> bin_expr . XOR bin_expr
+
+    )               shift and go to state 40
+    AND             shift and go to state 35
+    OR              shift and go to state 36
+    XOR             shift and go to state 37
+
+
+state 30
+
+    (21) factor -> ( expression . )
+    (8) expression -> expression . + term
+    (9) expression -> expression . - term
+    (10) expression -> expression . CONCAT term
+    (3) bin_expr_term -> expression . BINCOMP expression
+    (4) bin_expr_term -> expression . LIKE expression
+
+    )               shift and go to state 28
+    +               shift and go to state 9
+    -               shift and go to state 10
+    CONCAT          shift and go to state 11
+    BINCOMP         shift and go to state 33
+    LIKE            shift and go to state 34
+
+
+state 31
+
+    (22) function -> ID ( arglist ) .
+
+    *               reduce using rule 22 (function -> ID ( arglist ) .)
+    /               reduce using rule 22 (function -> ID ( arglist ) .)
+    +               reduce using rule 22 (function -> ID ( arglist ) .)
+    -               reduce using rule 22 (function -> ID ( arglist ) .)
+    CONCAT          reduce using rule 22 (function -> ID ( arglist ) .)
+    $end            reduce using rule 22 (function -> ID ( arglist ) .)
+    )               reduce using rule 22 (function -> ID ( arglist ) .)
+    BINCOMP         reduce using rule 22 (function -> ID ( arglist ) .)
+    LIKE            reduce using rule 22 (function -> ID ( arglist ) .)
+    ,               reduce using rule 22 (function -> ID ( arglist ) .)
+    AND             reduce using rule 22 (function -> ID ( arglist ) .)
+    OR              reduce using rule 22 (function -> ID ( arglist ) .)
+    XOR             reduce using rule 22 (function -> ID ( arglist ) .)
+
+
+state 32
+
+    (26) arglist -> arglist , . expression
+    (27) arglist -> arglist , . bin_expr
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (5) bin_expr -> . bin_expr AND bin_expr
+    (6) bin_expr -> . bin_expr OR bin_expr
+    (7) bin_expr -> . bin_expr XOR bin_expr
+    (13) bin_expr -> . NOT bin_expr_term
+    (16) bin_expr -> . bin_expr_term
+    (17) bin_expr -> . BOOLEAN
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (2) bin_expr_term -> . ( bin_expr )
+    (3) bin_expr_term -> . expression BINCOMP expression
+    (4) bin_expr_term -> . expression LIKE expression
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    NOT             shift and go to state 25
+    BOOLEAN         shift and go to state 27
+    STRING          shift and go to state 4
+    (               shift and go to state 21
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+
+    expression                     shift and go to state 41
+    bin_expr                       shift and go to state 42
+    term                           shift and go to state 2
+    bin_expr_term                  shift and go to state 26
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 33
+
+    (3) bin_expr_term -> expression BINCOMP . expression
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+    (               shift and go to state 8
+
+    expression                     shift and go to state 43
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 34
+
+    (4) bin_expr_term -> expression LIKE . expression
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+    (               shift and go to state 8
+
+    expression                     shift and go to state 44
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 35
+
+    (5) bin_expr -> bin_expr AND . bin_expr
+    (5) bin_expr -> . bin_expr AND bin_expr
+    (6) bin_expr -> . bin_expr OR bin_expr
+    (7) bin_expr -> . bin_expr XOR bin_expr
+    (13) bin_expr -> . NOT bin_expr_term
+    (16) bin_expr -> . bin_expr_term
+    (17) bin_expr -> . BOOLEAN
+    (2) bin_expr_term -> . ( bin_expr )
+    (3) bin_expr_term -> . expression BINCOMP expression
+    (4) bin_expr_term -> . expression LIKE expression
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    NOT             shift and go to state 25
+    BOOLEAN         shift and go to state 27
+    (               shift and go to state 21
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+
+    bin_expr                       shift and go to state 45
+    bin_expr_term                  shift and go to state 26
+    expression                     shift and go to state 39
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 36
+
+    (6) bin_expr -> bin_expr OR . bin_expr
+    (5) bin_expr -> . bin_expr AND bin_expr
+    (6) bin_expr -> . bin_expr OR bin_expr
+    (7) bin_expr -> . bin_expr XOR bin_expr
+    (13) bin_expr -> . NOT bin_expr_term
+    (16) bin_expr -> . bin_expr_term
+    (17) bin_expr -> . BOOLEAN
+    (2) bin_expr_term -> . ( bin_expr )
+    (3) bin_expr_term -> . expression BINCOMP expression
+    (4) bin_expr_term -> . expression LIKE expression
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    NOT             shift and go to state 25
+    BOOLEAN         shift and go to state 27
+    (               shift and go to state 21
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+
+    bin_expr                       shift and go to state 46
+    bin_expr_term                  shift and go to state 26
+    expression                     shift and go to state 39
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 37
+
+    (7) bin_expr -> bin_expr XOR . bin_expr
+    (5) bin_expr -> . bin_expr AND bin_expr
+    (6) bin_expr -> . bin_expr OR bin_expr
+    (7) bin_expr -> . bin_expr XOR bin_expr
+    (13) bin_expr -> . NOT bin_expr_term
+    (16) bin_expr -> . bin_expr_term
+    (17) bin_expr -> . BOOLEAN
+    (2) bin_expr_term -> . ( bin_expr )
+    (3) bin_expr_term -> . expression BINCOMP expression
+    (4) bin_expr_term -> . expression LIKE expression
+    (1) expression -> . term
+    (8) expression -> . expression + term
+    (9) expression -> . expression - term
+    (10) expression -> . expression CONCAT term
+    (11) term -> . term * factor
+    (12) term -> . term / factor
+    (14) term -> . factor
+    (18) term -> . STRING
+    (15) factor -> . ID
+    (19) factor -> . NUMBER
+    (20) factor -> . function
+    (21) factor -> . ( expression )
+    (22) function -> . ID ( arglist )
+
+    NOT             shift and go to state 25
+    BOOLEAN         shift and go to state 27
+    (               shift and go to state 21
+    STRING          shift and go to state 4
+    ID              shift and go to state 5
+    NUMBER          shift and go to state 6
+
+    bin_expr                       shift and go to state 47
+    bin_expr_term                  shift and go to state 26
+    expression                     shift and go to state 39
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    function                       shift and go to state 7
+
+state 38
+
+    (13) bin_expr -> NOT bin_expr_term .
+
+    AND             reduce using rule 13 (bin_expr -> NOT bin_expr_term .)
+    OR              reduce using rule 13 (bin_expr -> NOT bin_expr_term .)
+    XOR             reduce using rule 13 (bin_expr -> NOT bin_expr_term .)
+    )               reduce using rule 13 (bin_expr -> NOT bin_expr_term .)
+    ,               reduce using rule 13 (bin_expr -> NOT bin_expr_term .)
+
+
+state 39
+
+    (3) bin_expr_term -> expression . BINCOMP expression
+    (4) bin_expr_term -> expression . LIKE expression
+    (8) expression -> expression . + term
+    (9) expression -> expression . - term
+    (10) expression -> expression . CONCAT term
+
+    BINCOMP         shift and go to state 33
+    LIKE            shift and go to state 34
+    +               shift and go to state 9
+    -               shift and go to state 10
+    CONCAT          shift and go to state 11
+
+
+state 40
+
+    (2) bin_expr_term -> ( bin_expr ) .
+
+    AND             reduce using rule 2 (bin_expr_term -> ( bin_expr ) .)
+    OR              reduce using rule 2 (bin_expr_term -> ( bin_expr ) .)
+    XOR             reduce using rule 2 (bin_expr_term -> ( bin_expr ) .)
+    )               reduce using rule 2 (bin_expr_term -> ( bin_expr ) .)
+    ,               reduce using rule 2 (bin_expr_term -> ( bin_expr ) .)
+
+
+state 41
+
+    (26) arglist -> arglist , expression .
+    (8) expression -> expression . + term
+    (9) expression -> expression . - term
+    (10) expression -> expression . CONCAT term
+    (3) bin_expr_term -> expression . BINCOMP expression
+    (4) bin_expr_term -> expression . LIKE expression
+
+    )               reduce using rule 26 (arglist -> arglist , expression .)
+    ,               reduce using rule 26 (arglist -> arglist , expression .)
+    +               shift and go to state 9
+    -               shift and go to state 10
+    CONCAT          shift and go to state 11
+    BINCOMP         shift and go to state 33
+    LIKE            shift and go to state 34
+
+
+state 42
+
+    (27) arglist -> arglist , bin_expr .
+    (5) bin_expr -> bin_expr . AND bin_expr
+    (6) bin_expr -> bin_expr . OR bin_expr
+    (7) bin_expr -> bin_expr . XOR bin_expr
+
+    )               reduce using rule 27 (arglist -> arglist , bin_expr .)
+    ,               reduce using rule 27 (arglist -> arglist , bin_expr .)
+    AND             shift and go to state 35
+    OR              shift and go to state 36
+    XOR             shift and go to state 37
+
+
+state 43
+
+    (3) bin_expr_term -> expression BINCOMP expression .
+    (8) expression -> expression . + term
+    (9) expression -> expression . - term
+    (10) expression -> expression . CONCAT term
+
+    AND             reduce using rule 3 (bin_expr_term -> expression BINCOMP expression .)
+    OR              reduce using rule 3 (bin_expr_term -> expression BINCOMP expression .)
+    XOR             reduce using rule 3 (bin_expr_term -> expression BINCOMP expression .)
+    )               reduce using rule 3 (bin_expr_term -> expression BINCOMP expression .)
+    ,               reduce using rule 3 (bin_expr_term -> expression BINCOMP expression .)
+    +               shift and go to state 9
+    -               shift and go to state 10
+    CONCAT          shift and go to state 11
+
+
+state 44
+
+    (4) bin_expr_term -> expression LIKE expression .
+    (8) expression -> expression . + term
+    (9) expression -> expression . - term
+    (10) expression -> expression . CONCAT term
+
+    AND             reduce using rule 4 (bin_expr_term -> expression LIKE expression .)
+    OR              reduce using rule 4 (bin_expr_term -> expression LIKE expression .)
+    XOR             reduce using rule 4 (bin_expr_term -> expression LIKE expression .)
+    )               reduce using rule 4 (bin_expr_term -> expression LIKE expression .)
+    ,               reduce using rule 4 (bin_expr_term -> expression LIKE expression .)
+    +               shift and go to state 9
+    -               shift and go to state 10
+    CONCAT          shift and go to state 11
+
+
+state 45
+
+    (5) bin_expr -> bin_expr AND bin_expr .
+    (5) bin_expr -> bin_expr . AND bin_expr
+    (6) bin_expr -> bin_expr . OR bin_expr
+    (7) bin_expr -> bin_expr . XOR bin_expr
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for XOR resolved as shift
+    )               reduce using rule 5 (bin_expr -> bin_expr AND bin_expr .)
+    ,               reduce using rule 5 (bin_expr -> bin_expr AND bin_expr .)
+    AND             shift and go to state 35
+    OR              shift and go to state 36
+    XOR             shift and go to state 37
+
+  ! AND             [ reduce using rule 5 (bin_expr -> bin_expr AND bin_expr .) ]
+  ! OR              [ reduce using rule 5 (bin_expr -> bin_expr AND bin_expr .) ]
+  ! XOR             [ reduce using rule 5 (bin_expr -> bin_expr AND bin_expr .) ]
+
+
+state 46
+
+    (6) bin_expr -> bin_expr OR bin_expr .
+    (5) bin_expr -> bin_expr . AND bin_expr
+    (6) bin_expr -> bin_expr . OR bin_expr
+    (7) bin_expr -> bin_expr . XOR bin_expr
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for XOR resolved as shift
+    )               reduce using rule 6 (bin_expr -> bin_expr OR bin_expr .)
+    ,               reduce using rule 6 (bin_expr -> bin_expr OR bin_expr .)
+    AND             shift and go to state 35
+    OR              shift and go to state 36
+    XOR             shift and go to state 37
+
+  ! AND             [ reduce using rule 6 (bin_expr -> bin_expr OR bin_expr .) ]
+  ! OR              [ reduce using rule 6 (bin_expr -> bin_expr OR bin_expr .) ]
+  ! XOR             [ reduce using rule 6 (bin_expr -> bin_expr OR bin_expr .) ]
+
+
+state 47
+
+    (7) bin_expr -> bin_expr XOR bin_expr .
+    (5) bin_expr -> bin_expr . AND bin_expr
+    (6) bin_expr -> bin_expr . OR bin_expr
+    (7) bin_expr -> bin_expr . XOR bin_expr
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for XOR resolved as shift
+    )               reduce using rule 7 (bin_expr -> bin_expr XOR bin_expr .)
+    ,               reduce using rule 7 (bin_expr -> bin_expr XOR bin_expr .)
+    AND             shift and go to state 35
+    OR              shift and go to state 36
+    XOR             shift and go to state 37
+
+  ! AND             [ reduce using rule 7 (bin_expr -> bin_expr XOR bin_expr .) ]
+  ! OR              [ reduce using rule 7 (bin_expr -> bin_expr XOR bin_expr .) ]
+  ! XOR             [ reduce using rule 7 (bin_expr -> bin_expr XOR bin_expr .) ]
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 45 resolved as shift
+WARNING: shift/reduce conflict for OR in state 45 resolved as shift
+WARNING: shift/reduce conflict for XOR in state 45 resolved as shift
+WARNING: shift/reduce conflict for AND in state 46 resolved as shift
+WARNING: shift/reduce conflict for OR in state 46 resolved as shift
+WARNING: shift/reduce conflict for XOR in state 46 resolved as shift
+WARNING: shift/reduce conflict for AND in state 47 resolved as shift
+WARNING: shift/reduce conflict for OR in state 47 resolved as shift
+WARNING: shift/reduce conflict for XOR in state 47 resolved as shift

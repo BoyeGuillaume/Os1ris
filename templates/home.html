@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osiris</title>
+    <link rel="stylesheet" href="/static/style/FontAwesome/v4-font-face.min.css">
+    <link rel="stylesheet" href="/static/style/FontAwesome/all.min.css">
+    <link rel="stylesheet" href="/static/style/jquery-ui.min.css">
+    <link rel="stylesheet" href="/static/style/jquery.tag-editor.css">
+    <link rel="stylesheet" href="/static/style/mermaid.min.css">
+    <link rel="stylesheet" href="/static/style/nice-form.css">
+    <link rel="stylesheet" href="/static/style/home.css">
+    <link rel="stylesheet" href="/static/style/loader.css">
+    <link rel="stylesheet" href="/static/style/page.css">
+    <link rel="stylesheet" href="/static/style/utils.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <script src="/static/scripts/jquery-3.7.0.min.js"></script>
+    <script src="/static/scripts/gridjs.production.min.js"></script>
+    <script src="/static/scripts/gridjs.umd.js"></script>
+    <script src="/static/scripts/lodash-1.8.3.min.js"></script>
+    <script src="/static/scripts/jquery.caret.min.js"></script>
+    <script src="/static/scripts/jquery-ui.min.js"></script>
+    <script src="/static/scripts/jquery.tag-editor.min.js"></script>
+    <script src="/static/scripts/moment.min.js"></script>
+    <script type="module" src="/static/scripts/chart-4.3.0.min.js"></script>
+    <script type="module" src="/static/scripts/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="/static/scripts/jscolor.js"></script>
+    <script src="/static/scripts/utils.js"></script>
+</head>
+<body>
+    <!-- See https://www.htmlelements.com/demos/page-templates/admin-template/ -->
+
+    <div class="primary-container main">
+        <aside id="sideBar" class="sidebar hover-on-toggle">
+            <div class="logo-holder">
+                <img src="/static/logo/png/logo-color-short.png">
+                <span>Osiris</span>
+            </div>
+
+            <div class="tree-holder">
+                <ul class="tree">
+                    <li>
+                        <span>Operations</span>
+
+                        <ul class="tree">
+                            <div>
+                                <li class="icon collapsable">
+                                    <i class="fa-solid fa-landmark"></i>
+                                    <!-- <i class="fa-solid fa-file-invoice"></i> fa-landmark -->
+                                    Accounts
+                                    <i id="CreateAccountButton" class="fa-solid fa-square-plus add-btn" onclick="registry.goto('new-account', {});"></i>
+                                </li>
+                                <ul class="tree" id="sideBarAccountListing">
+                                </ul> 
+                            </div>
+
+                            <div>
+                                <li class="icon collapsable">
+                                    <i class="fa-solid fa-scale-balanced"></i>
+                                    Budget
+                                    <i id="CreateBudgetButton" class="fa-solid fa-square-plus add-btn" onclick="registry.goto('new-budget', {});"></i>
+                                </li>
+                                <ul class="tree" id="sideBarBudgetListing"></ul>
+                            </div>
+
+                            <li class="icon" id="tagButton" onclick="registry.goto('tags', {});"><i class="fa-solid fa-tags"></i>Tags</li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <span>Tools & Analysis</span>
+                        
+                        <ul class="tree">
+                            <li class="icon"><i class="fa-solid fa-magnifying-glass-chart"></i>Dashboard</li>
+                            <li class="icon"><i class="fa-solid fa-chart-pie"></i>Charts</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <span>About</span>
+                        <ul class="tree">
+                            <li class="icon" id="supportButton" onclick="registry.goto('support', {});"><i class="fa-solid fa-headset"></i>Support</li>
+                            <li class="icon" id="aboutButton" onclick="registry.goto('about', {});"><i class="fa-solid fa-circle-info"></i>About</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <div id="secondaryContainer" class="content">
+            <!-- Header -->
+            <div class="header">
+                <ul class="nav navigation-left" id="topHeaderTabs">
+                </ul>
+
+                <ul class="nav navigation-right">
+                    <li class="nav-item px-3" id="language"><img src="https://img.icons8.com/office/30/000000/usa.png"></li>
+                    <li class="nav-item px-3 profile" id="profile">
+                        <div class="holder">
+                            <div class="name text-break-line-2">Hi, {{ username }}</div>
+                            <div class="avatar" style="background-image: url('/user-profile-icon.png');"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Profile dropdown -->
+            <div class="content">
+
+                <div id="profileDropdown" class="profile-dropdown hidden">
+                    <div class="container">
+                        <div class="holder">
+                            <div class="avatar" style="background-image: url('/user-profile-icon.png');"></div>
+                            <div class="name text-break-line-2">{{ username }}</div>
+                        </div>
+    
+                        <ul class="tree">
+                            <li class="icon"><i class="fa-solid fa-user"></i>Profile</li>
+                            <li class="icon"><i class="fa-solid fa-gear"></i>Settings</li>
+                            <li class="icon" onclick="window.location = '/logout'"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="mainFrame">
+                </div>
+            </div>
+
+            <!-- Notofication class -->
+            <div class="notification-container" id="notificationStatic">
+            </div>
+
+            <div id="popupBinder">
+                <div class="content"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/scripts/home-page.js"></script>
+    <script src="/static/scripts/constants.js"></script>
+    <script src="/static/scripts/home.js"></script>
+    <script src="/static/scripts/pages.js"></script>
+    <script src="/static/scripts/api.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<div class="markdown-body m-t-25">
+    <h2>Writing Queries</h2>
+
+    <p>
+        
+    </p>
+
+    <h4>Available variable <em>(Value)</em></h4>
+
+    <p>
+        These are the variable available for usage when writing budget for expenses
+    </p>
+
+    <ul>
+        <li><code>wealth</code> &#x2014; (number) total money currently variable within the bank account minus safety level (sum of all transaction previously matched by the income minus expense)</li>
+        <li><code>raw_wealth</code> &#x2014; (number) total money available (sum of all transaction previously matched by the income minus expense)</li>
+        <li><code>total_income</code> &#x2014; (number) sum of all incomes during the interval minus safety level</li>
+        <li><code>raw_income</code> &#x2014; (number) sum of all raw incomes <b>(should prefer total_income)</b></li>
+        <!-- <li><code>predicted_income</code> (number) &#x2014; sum of all incomes plus the one schedules within this interval minus safety level</li>
+        <li><code>raw_predicted_income</code> (number) &#x2014; sum of all incomes plus the one schedules within this interval</li> -->
+    </ul>
+
+
+    <h4>Available variable <em>(Filter)</em></h4>
+
+    <p>
+        These are the variable available for usage when writing filter for Incomes and Expenses
+    </p>
+
+    <ul>
+        <li><code>id</code> (integer) &#x2014; the unique index corresponding with the transaction</li>
+        <li><code>account</code> (string) &#x2014; name of the account where the transaction occurred</li>
+        <li><code>amount</code> (number) &#x2014; amount of the transaction</li>
+        <li><code>date</code> (date) &#x2014; date at which the transaction occurred</li>
+        <li><code>available_date</code> (date) &#x2014; date at which the transaction become effective within the bank system</li>
+        <li><code>registration_date</code> (date) &#x2014; date at which the transaction was registered within the system</li>
+        <li><code>description</code> (string) &#x2014; the description corresponding with the transaction</li>
+        <li><code>tags</code> (string) &#x2014; list of tags associated with a transaction, separated with <code>,</code></li>
+    </ul>
+</div>
